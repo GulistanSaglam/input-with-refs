@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useRef } from 'react'
+import './App.css'
 
 function App() {
+
+  const personName = useRef();
+  const [enteredName, setEnteredName] = useState(null);
+
+  const handleName = () => {
+    setEnteredName(personName.current.value);
+    personName.current.value = ''
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <h1>Welcome <span> {enteredName ?? 'Unknown Name'} </span></h1>
+      <div className='form'>
+        <input ref={personName} type='text' />
+        <button onClick={handleName}>Submit</button>
+      </div>
     </div>
   );
 }
